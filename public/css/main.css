@@ -1,0 +1,59 @@
+.images{
+    margin-top: 60px;
+}
+.achat-img{
+    height:350px;
+    width: 320px;
+    background-image: url(../storage/dashbord/achat.jpg);
+    margin-left: 30px;
+    margin-right: 20px; 
+    margin-bottom: 15px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    opacity: 0.7;
+    float: left;
+    
+}
+.achat-img1{
+    height:350px;
+    width: 320px;
+    background-image: url(../storage/dashbord/stock.jpg);
+    margin-right: 20px;
+    margin-bottom: 15px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    opacity: 0.7;
+    float: left;
+
+}
+
+.achat-img2{
+    height:350px;
+    width: 320px;
+    background-image: url(../storage/dashbord/reap.jpg);
+   
+    margin-bottom: 15px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    opacity: 0.7;
+    float: left;
+
+}
+
+
+
+
+.text{
+    text-align: center;
+    padding-top: 200px;
+}
+.text p{
+    background-color: black;
+    color: aliceblue;
+}

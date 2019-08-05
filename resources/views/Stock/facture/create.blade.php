@@ -231,6 +231,7 @@ function addRow() {
         $pr[$i]=$element;
         $i++; //if exist fill in table
     });
+console.log(JSON.stringify($pr));
     return $pr;
   }
 
@@ -262,11 +263,12 @@ function newstore()
         {
 
         console.log(result);
-        document.location.href = result;
+        location.reload();
+        //document.location.href = result;
 
         },
-        error:function(result){
-         console.log(result);
+        error:function(){
+         alert( 'Error ...');
         }
         })
     

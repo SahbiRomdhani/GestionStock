@@ -35,7 +35,7 @@
             </tr>
             @endforeach
             @else 
-            N'a pas de données
+            Il n y a pas de données
             @endif
 
             

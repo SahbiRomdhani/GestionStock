@@ -77,8 +77,8 @@ class LivraisonFactureController extends Controller
         }
 
 
-        session()->flash('success', 'Task was successful!');
-        return redirect()->route('home');
+        $request->session()->flash('success', 'Nouveau Produit Ajouter');
+        return response()->json(['status' => 'Hooray']);        
 
 
     }
@@ -91,7 +91,9 @@ class LivraisonFactureController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $facture = LivraisonFacture::find($id);
+        return view('stock.facture.show', compact('facture'));
     }
 
     /**
@@ -102,7 +104,7 @@ class LivraisonFactureController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

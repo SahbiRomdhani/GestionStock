@@ -19,7 +19,7 @@
             @if (count($factures)>0)
             @foreach ($factures as $facture)
             <tr>
-                <td><a href="achat/{{$facture->demande_achat_id}}">{{$facture->demande_achat_id}}</td>
+                <td><a href="achat/{{$facture->demande_achat_id}}"> {{$facture->demande_achat_id}} </td>
                 <td>{{$facture->reference}}</td>
                 <td>{{$facture->Fournisseur->nom_fournisseur}}</td>
                 <td>

@@ -84,8 +84,11 @@ class AchatController extends Controller
             $produit->save();
         }
 
-       // return $demande->id;
-        return redirect()->route('achat.index');
+        // return $demande->id;
+
+
+        $request->session()->flash('success', 'Demande a été Ajouter ');
+        return response()->json(['status' => 'Hooray']);    
     }
 
     /**

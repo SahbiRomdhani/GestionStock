@@ -8,6 +8,7 @@
     
         <table class="table table-striped">
             <tr>
+            <th> Bon De ID </th>
             <th>Produit</th>
             <th>Magasin</th>
             <th>Type </th>
@@ -19,6 +20,15 @@
             <th colspan="2" style="text-align: center">Action</th>
             </tr>
             <tr>
+                <td>
+                    @if ($stock->bon_type == "Livraison")
+                    <a href="/facture/{{$stock->bon_id}}"> {{$stock->bon_id}} </a>
+                    @else 
+                    <a href="/bentree/{{$stock->bon_id}}"> {{$stock->bon_id}} </a>
+                    @endif
+                    
+                </td>
+                
                 <td>{{$stock->produit->designation}}</td>
                 <td>{{$stock->magasin->nom_magasin}}</td> 
                 <td>{{$stock->bon_type}}</td>

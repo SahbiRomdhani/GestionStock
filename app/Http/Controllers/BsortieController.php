@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\bsortie;
+use App\magasin;
 use App\Demandereap;
 use App\Maintenance;
+use Illuminate\Http\Request;
+use DB;
+use App\ProduitReap;
+use App\ProduitStock;
 
 class BsortieController extends Controller
 {
@@ -26,11 +30,37 @@ class BsortieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $demandereap=Demandereap::pluck('date','id')->all();
-        $maintenance=Maintenance::pluck('date','id')->all();
-        return view( 'stock.bille.bsortie.create',compact('demandereap', 'maintenance'));
+    {      
+        $stocks=ProduitStock::all();
+        $magasin=magasin::all();
+        $demandereap=Demandereap::all();
+        $maintenance=Maintenance::all();
+        return view( 'stock.bille.bsortie.create',compact('demandereap', 'maintenance', 'magasin', 'stocks'));
 
+    }
+    /**
+    * get Demande selon magasin
+    */
+    public function getdemande(Request $request)
+    {  
+        //$id = $request->get(id);
+        $demande = DB::table('demande_reap')->where('magasin_id', $request->id)->get();
+        //dd($products);
+        return  response($demande); 
+    }
+    /**
+     * get Demande selon magasin
+     */
+    public function getproduitreap(Request $request)
+    {
+        //$id = $request->get(id);
+        // $demandereap = ProduitReap::where('demande_reap_id', $request->id)->get();
+        $demandereap = ProduitReap::join('produits', 'produits.id', '=', 'produit_demande_reap.produit_id')
+            ->selectRaw(
+            'produits.designation,produit_demande_reap.demande_reap_id,produit_demande_reap.quantite'
+            )->where('demande_reap_id', $request->id)->get();
+        //dd($products);
+        return  response($demandereap);
     }
 
     /**
@@ -91,4 +121,5 @@ class BsortieController extends Controller
         $sortie->delete();
         return redirect( route('bsortie.index'));
     }
+    
 }

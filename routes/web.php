@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-/** Notification */
+
+
+/***** Notification ***********************/
 Route::get('/maskasread', function () {
     $user = Auth::user();
     $user->unreadNotifications->markAsRead();
@@ -27,7 +29,17 @@ Route::get('/Readnotification', 'HomeController@readnot')->name('ajaxread');
 
 Route::get('/notification','HomeController@notification');
 
-/** */
+/** *******************************/
+
+/******* Bon DE Sortie  */
+Route::resource('/bsortie', 'BsortieController');
+Route::post('/bsortie/magasindemande', 'BsortieController@getdemande')->name('magasin.demande');
+Route::post('/bsortie/produitdemandereap', 'BsortieController@getproduitreap')->name('produit.demande.reap');
+
+
+
+
+/************************** */
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/produit','ProduitController');
@@ -36,7 +48,6 @@ Route::resource('/fournisseur','FournisseurController');
 Route::resource('/produitstock','ProduitStockController');
 Route::resource('/bentree','BentreController');
 Route::resource('/produitachat','ProduitDemandeAchatController');
-Route::resource('/bsortie','BsortieController');
 Route::resource('/produitsortie','ProduitSortieController');
 Route::resource('/demandereap','DemandereapController');
 Route::resource('/produitreap', 'ProduitReapController');

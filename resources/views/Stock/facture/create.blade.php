@@ -20,7 +20,7 @@
        <tbody>
     <td >
        <select class="form-control"  name="demande_achat_id" id="demande_achat_id"> 
-           <option value="" > --- Select une Demande --- </option>
+           <option value="" disabled selected> --- Select une Demande --- </option>
            @foreach ($achat as $key)
            <option value="{{$key->id}}"> {{$key->id}} </option>
                
@@ -28,7 +28,7 @@
        </select>
     <td >
          <select class="form-control"  name="fournisseur_id" id="fournisseur_id"> 
-           <option value="" > --- Select un Fournisseur --- </option>
+           <option value="" disabled selected> --- Select un Fournisseur --- </option>
            @foreach ($fournisseur as $key )
            <option value="{{$key->id}}"> {{$key->nom_fournisseur}} </option>
                
@@ -93,13 +93,15 @@
 
 
    
-
-   <table class="table table-striped table-bordred">
+<div class="row">
+        <div class="col-sm-1" ></div>
+        <div class="col-sm-10" >
+   <table class="table table-striped " >
           <thead>
-           <th>Produit</th>
-           <th>Quantite</th>
-           <th>Prix</th>
-           <th>Garantie</th>
+           <th style="width: 22%">Produit</th>
+           <th style="width: 22%">Quantite</th>
+           <th style="width: 22%">Prix</th>
+           <th style="width: 22%">Garantie</th>
         
        </thead> 
        <tbody id="stock">
@@ -116,6 +118,8 @@
         </tr>
        </tfoot>
    </table>
+        </div>
+      </div>
 
 
 @endsection

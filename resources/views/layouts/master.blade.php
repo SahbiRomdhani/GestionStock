@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="header">
                 You have {{ count(Auth::user()->unreadNotifications)}} notifications 
 
-                 <a href="{{route('maskasread')}}" id="markread"> Mark as Read</a>
+                 <a href="{{route('maskasread')}}" onclick="markasread()"> Mark as Read</a>
               
               </li>
 
@@ -376,7 +376,7 @@ $('a[data-notif-id]').click(function () {
           type: 'get',
           datatype: 'json',
         
-        success: function(result)
+        success: function(result) 
         {
           $("#notstyle").removeAttr("style");
           console.log(result);
@@ -385,11 +385,10 @@ $('a[data-notif-id]').click(function () {
         })
 })
 //-------------------------
-$(document).ready(function(){
-  $("#markread").click(function(){
+
+function markasread(){
     $("#notstyle").removeAttr("style");
-  })
-})
+}
 </script>
 @yield('script')
 

@@ -70,6 +70,7 @@ class LivraisonFactureController extends Controller
             $prodstock->bon_type= "Livraison";
             $prodstock->bon_id = $id;
             $prodstock->save();
+            // $livraison->stock()->save($prodstock);
 
             $user = auth()->user();
             $user->notify(new StockNot(ProduitStock::findOrfail($prodstock->id), (User::findOrfail($user->id))));

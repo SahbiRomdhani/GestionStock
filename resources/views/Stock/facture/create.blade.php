@@ -193,11 +193,15 @@ function addRow() {
     document.getElementById('id_category').value = '';
 
 
-
     }
+    
+
+    
 
     
 };
+//--------------------------------------------
+
 //--------------------delete Selected Item dropDown-------------------------
  
   function check_product($id) {
@@ -231,7 +235,6 @@ function addRow() {
         $pr[$i]=$element;
         $i++; //if exist fill in table
     });
-console.log(JSON.stringify($pr));
     return $pr;
   }
 

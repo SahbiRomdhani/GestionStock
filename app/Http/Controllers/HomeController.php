@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
 use App\demande_achat;
 use App\ProduitDemandeAchat;
-use DB;
+use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -34,5 +35,12 @@ class HomeController extends Controller
     public function notification(){
         $user = Auth()->user();
         return view('notification.index',compact('user'));
+    }
+    public function readnot(Request $request){
+        
+        $user = auth()->user();
+        $notifcation=$user->notifications()->where('id', $request->id)->first()->markAsRead();
+        
+        return $notifcation;
     }
 }

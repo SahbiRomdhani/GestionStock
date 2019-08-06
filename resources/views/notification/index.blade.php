@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <h1> All Notification</h1>
+    <h1 style="text-align: center">  Notifications</h1>
   <div class="list-group">
 
     <!-- start notification -->

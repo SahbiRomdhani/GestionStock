@@ -75,7 +75,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @endif
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have {{ count(Auth::user()->unreadNotifications)}} notifications</li>
+              <li class="header">
+                You have {{ count(Auth::user()->unreadNotifications)}} notifications 
+
+                 <a href="{{route('maskasread')}}" id="markread"> Mark as Read</a>
+              
+              </li>
+
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
@@ -83,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     @foreach (auth()->user()->Notifications as $notification)
                    
-                      <a href="/produitstock/{{$notification->data['produitstock_id']}}">
+                      <a id="notstyle" style="background-color:#b5bab6 ; color:white "  href="/produitstock/{{$notification->data['produitstock_id']}}" data-notif-id="{{$notification->id}}">
                         {{$notification->data['user_name']}}
                         {{$notification->data['msg']}}
                         {{$notification->data['magasin']}}
@@ -358,6 +364,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src={{asset('AdminLTE/dist/js/adminlte.min.js')}}></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+$('a[data-notif-id]').click(function () {
+
+        var id   = $(this).data('notif-id');
+
+        $.ajax({
+          url : "{{route('ajaxread') }}",
+          data :{"id":id} ,
+         
+          type: 'get',
+          datatype: 'json',
+        
+        success: function(result)
+        {
+          $("#notstyle").removeAttr("style");
+          console.log(result);
+          
+        }
+        })
+})
+//-------------------------
+$(document).ready(function(){
+  $("#markread").click(function(){
+    $("#notstyle").removeAttr("style");
+  })
+})
+</script>
 @yield('script')
 
 

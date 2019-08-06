@@ -16,18 +16,18 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/not', function () {
+/** Notification */
+Route::get('/maskasread', function () {
     $user = Auth::user();
-    dd($user->notifications);
-
-    foreach ($user->notifications as $notification) {
-        echo $notification->type;
-    }
+    $user->unreadNotifications->markAsRead();
+    return redirect()->back();
     
-});
+})->name('maskasread');
+Route::get('/Readnotification', 'HomeController@readnot')->name('ajaxread');
+
 Route::get('/notification','HomeController@notification');
 
-
+/** */
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/produit','ProduitController');

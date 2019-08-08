@@ -31,7 +31,6 @@ class BsortieController extends Controller
      */
     public function create()
     {      
-        $stocks=ProduitStock::all();
         $magasin=magasin::all();
         $demandereap=Demandereap::all();
         $maintenance=Maintenance::all();
@@ -57,10 +56,18 @@ class BsortieController extends Controller
         // $demandereap = ProduitReap::where('demande_reap_id', $request->id)->get();
         $demandereap = ProduitReap::join('produits', 'produits.id', '=', 'produit_demande_reap.produit_id')
             ->selectRaw(
-            'produits.designation,produit_demande_reap.demande_reap_id,produit_demande_reap.quantite'
+            'produits.designation,produits.id,produit_demande_reap.demande_reap_id,produit_demande_reap.quantite'
             )->where('demande_reap_id', $request->id)->get();
         //dd($products);
         return  response($demandereap);
+    }
+    /*** GEt Produit selon Demande REap */
+    public function getproduitdemande(Request $request){
+        $stocks = ProduitStock::join('produits', 'produits.id', '=', 'produit_stock.produit_id')
+            ->selectRaw(
+            'produits.designation,produits.id,produit_stock.quantite_actuel,produit_stock.prix_unitaire'
+            )->where('produit_id', $request->id)->get();
+        return response($stocks);
     }
 
     /**

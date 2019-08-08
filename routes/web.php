@@ -35,6 +35,7 @@ Route::get('/notification','HomeController@notification');
 Route::resource('/bsortie', 'BsortieController');
 Route::post('/bsortie/magasindemande', 'BsortieController@getdemande')->name('magasin.demande');
 Route::post('/bsortie/produitdemandereap', 'BsortieController@getproduitreap')->name('produit.demande.reap');
+Route::post('/bsortie/prodstockDemande', 'BsortieController@getproduitdemande')->name('prod.demandeReap');
 
 
 

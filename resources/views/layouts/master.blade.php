@@ -5,6 +5,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <head>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
@@ -89,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     @foreach (auth()->user()->Notifications as $notification)
                    
-                      <a id="notstyle" style="background-color:#b5bab6 ; color:white "  href="/produitstock/{{$notification->data['produitstock_id']}}" data-notif-id="{{$notification->id}}">
+                      <a id="notstyle" style="background-color:#b5bab6 ; color:white"  href="/produitstock/{{$notification->data['produitstock_id']}}" data-notif-id="{{$notification->id}}">
                         {{$notification->data['user_name']}}
                         {{$notification->data['msg']}}
                         {{$notification->data['magasin']}}
@@ -188,14 +190,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="{{route('facture.index')}}"><i class="fas fa-hand-holding-usd"></i> <span>Bon de Livraison Facture</span></a></li>
+        <li class="active"><a href="{{route('facture.index')}}"><i class="fas fa-hand-holding-usd"></i> <span> Bon de Livraison Facture</span></a></li>
 
-        <li class="active"><a  href="{{route('bentree.index')}}"><i class="fas fa-network-wired"></i><span>Bon de Entree</span> </a></li>
-        <li class="active"><a  href="{{route('bsortie.index')}}"><i class="fas fa-shipping-fast"></i><span>Bon de Sortie</span> </a></li>
+        <li class="active"><a  href="{{route('bentree.index')}}"><i class="fas fa-network-wired"></i><span> Bon de Entree</span> </a></li>
+        <li class="active"><a  href="{{route('bsortie.index')}}"><i class="fas fa-shipping-fast"></i><span> Bon de Sortie</span> </a></li>
       
      
         <li class="treeview">
-          <a href=""><i class="fas fa-dollar-sign"></i> <span>Achat</span>
+          <a href=""><i class="fas fa-dollar-sign"></i> <span> Achat</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -379,6 +381,9 @@ $('a[data-notif-id]').click(function () {
         success: function(result) 
         {
           $("#notstyle").removeAttr("style");
+          $("#notstyle").css("background-color","white");
+
+
           console.log(result);
           
         }
@@ -387,7 +392,7 @@ $('a[data-notif-id]').click(function () {
 //-------------------------
 
 function markasread(){
-    $("#notstyle").removeAttr("style");
+    $("#notstyle").css("background-color","white");
 }
 </script>
 @yield('script')

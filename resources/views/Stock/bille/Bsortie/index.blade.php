@@ -1,19 +1,21 @@
 @extends('layouts.master')
 @section('content')
-    <h1>Bille Sortie</h1>
+    <h1 style="text-align: center">Bon De  Sortie</h1>
 
 
+<div class="row">
+        <div class="col-sm-1" ></div>
+        <div class="col-sm-10" >
     
     <div style="overflow: auto;white-space: nowrap;" class="scrollmenu">
-            <a class="btn btn-success" style="border:1px solid black ; float: right; " href="{{route('bsortie.create')}}">Ajouter Billet</a>
+            <a class="btn btn-success" style="border:1px solid black ; float: right; " href="{{route('bsortie.create')}}">Ajouter Bon de Sortie</a>
 
     
         <table class="table table-striped">
             <tr>
                 <th>Demande Reap </th>
-                <th>Demande Maintenance</th>
+                <th>Reference</th>
                 <th>Date</th>
-                <th>Action</th>
 
             </tr>
             @if (count($bsortie)>0)
@@ -21,7 +23,7 @@
        
             <tr>
                 <td>{{$sortie->demande_reap_id}}</td>
-                <td>{{$sortie->demande_maintenance_id}}</td>
+                <td>{{$sortie->reference}}</td>
                 <td>{{$sortie->date}}</td>
 
             </tr>
@@ -30,5 +32,9 @@
              Table Vide
              @endif
         </table>
+        {{$bsortie->links()}}
+
     </div>
+        </div>
+</div>
 @endsection

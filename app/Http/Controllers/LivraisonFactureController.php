@@ -22,7 +22,7 @@ class LivraisonFactureController extends Controller
      */
     public function index()
     {   
-        $factures = LivraisonFacture::orderBy('id','desc')->get();
+        $factures = LivraisonFacture::orderBy('id','desc')->paginate(7);
         return view('stock.facture.index',compact('factures'));
     }
 
@@ -67,10 +67,11 @@ class LivraisonFactureController extends Controller
             $prodstock->prix_unitaire = $value->prix;
             $prodstock->quantite_actuel = $value->quantite;
             $prodstock->nbr_mois_garantie = $value->garantie;
-            $prodstock->bon_type= "Livraison";
-            $prodstock->bon_id = $id;
+            // $prodstock->bon_type= "Livraison";
+            // $prodstock->bon_id = $id;
+            $livraison->stock()->save($prodstock);
+
             $prodstock->save();
-            // $livraison->stock()->save($prodstock);
 
             $user = auth()->user();
             $user->notify(new StockNot(ProduitStock::findOrfail($prodstock->id), (User::findOrfail($user->id))));

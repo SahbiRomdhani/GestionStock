@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\ProduitReap;
 use App\ProduitStock;
+use App\ProduitSortie;
 
 class BsortieController extends Controller
 {
@@ -20,7 +21,7 @@ class BsortieController extends Controller
      */
     public function index()
     {   
-        $bsortie=bsortie::orderBy('id','desc')->get();
+        $bsortie=bsortie::orderBy('id','desc')->paginate(7);
         return view('stock.bille.bsortie.index',compact('bsortie'));
     }
 
@@ -65,7 +66,8 @@ class BsortieController extends Controller
     public function getproduitdemande(Request $request){
         $stocks = ProduitStock::join('produits', 'produits.id', '=', 'produit_stock.produit_id')
             ->selectRaw(
-            'produits.designation,produits.id,produit_stock.quantite_actuel,produit_stock.prix_unitaire'
+            'produit_stock.id,produits.designation,produit_stock.quantite_actuel
+            ,produit_stock.prix_unitaire,produits.id As produit_id'
             )->where('produit_id', $request->id)->get();
         return response($stocks);
     }
@@ -76,10 +78,56 @@ class BsortieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storesortie(Request $request)
     {
-        bsortie::create($request->all());
-        return redirect('bsortie');
+        $bsortie = new bsortie();
+        $bsortie->demande_reap_id = $request->demande;
+        $bsortie->reference = $request->reference;
+        $bsortie->date = $request->date;
+        $bsortie->save();
+        $id = $bsortie->id;
+        /** Save Produit Dans le stock */
+
+        $products = json_decode($request->products);
+        foreach ($products as $value) {
+        $sortie=0;
+        $produit = new ProduitSortie();
+        $produit->produit_stock_id = $value->stock_id;
+        //$produit->prix = $value->prix;
+        $produit->quantite = $value->sortie;
+        $produit->b_sotrie_id= $id;
+        $produit->save();
+        $stock_qunt = DB::table('produit_stock')->where([
+        
+            ['produit_id', '=', $value->idproduit],
+            ['prix_unitaire', '=', $value->prix],
+
+        ])->first()->quantite_actuel;
+        $sortie=$stock_qunt-($value->quantite);
+        //abs($x);
+        $table =DB::table('produit_stock')->where([
+        
+            ['produit_id', '=', $value->idproduit],
+            ['prix_unitaire', '=', $value->prix],
+
+        ])->update(['quantite_actuel' => $sortie]);
+
+    }
+
+return $products;
+
+    
+
+
+
+
+
+        // foreach ($products as $value) {
+        //     $quantite_actuel = ProduitStock::where('id', $value->stock_id)->get();
+        //     $prodstock = ProduitStock::find($value->stock_id);
+        //     $prodstock->quantite_actuel = $value->quantite;        
+        //     $prodstock->save();
+        // }
     }
 
     /**

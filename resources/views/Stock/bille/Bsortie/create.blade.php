@@ -65,7 +65,7 @@
         <tr>
        <td colspan="3"></td>
         <td>
-        <button class="btn btn-success btn-sm " type="button" >
+        <button class="btn btn-success btn-sm " type="button" onclick="get_produits()" >
           Créer </button>
            </td>
         </tr>
@@ -100,7 +100,7 @@
                 <tbody id="produitmodal">
                  
                 </tbody>
-                <tfoot > 
+                <tfoot id="footermodal" > 
                     <tr >
                         <td colspan="2"> Quantite Sortie :  </td>
                         <td ><output id="quantite"> </output> </td>
@@ -109,6 +109,7 @@
                         <td colspan="2"> Quantite Demander :  </td>
                         <td ><output id="quantite_demander"> </output> </td>
                     </tr>
+                    <tr> <p id="erreur" style="color:red"> </p> </tr>
                     
                 </tfoot>
 
@@ -118,7 +119,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="addRow()">Ajouter</button>
+        <button type="button" class="btn btn-info"  onclick="addRow()">Ajouter</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
         </div>
@@ -218,7 +219,7 @@ function produitdemande($id,$quantite) {
         //console.log(result);
          $.each(result, function(k, v){
    
-        $('#produitmodal').append("<tr data-idproduit='"+v.id+"' ><td id='produit'>"+ v.designation +"</td><td id='quantite_actuel'>"+ v.quantite_actuel +"</td><td id='prix'>"+ v.prix_unitaire +"</td><td><input type='number' class='form-control sortie' name='sortie' id='sortie' onKeyUp='if(this.value>"+v.quantite_actuel +"){this.value="+v.quantite_actuel +";}' ></td></tr>");
+        $('#produitmodal').append("<tr data-idtable='"+v.produit_id+"' data-idproduit='"+v.id+"' ><td id='produit'>"+ v.designation +"</td><td id='quantite_actuel'>"+ v.quantite_actuel +"</td><td id='prix'>"+ v.prix_unitaire +"</td><td><input type='number' class='form-control sortie' name='sortie' id='sortie' onKeyUp='if(this.value>"+v.quantite_actuel +"){this.value="+v.quantite_actuel +";}' ></td></tr>");
 
         })
         $('#quantite_demander').text(quantite);
@@ -229,19 +230,32 @@ function produitdemande($id,$quantite) {
 })
 $('#produitmodal').empty();
 
+$('#erreur').empty();
+
+
 
 }
 //-------------------------------Ajouter de model au tableau -----------------------------
 function addRow() {
-  $somme = $('#quantite').val();
-  var t = '';
+  var somme = $('#quantite').val();
+  var demande = $('#quantite_demander').val();
 
+  //console.log(demande);
+  //console.log(somme);
+  if ( somme > demande) {
+  var erreur = 'La Quantite de Sortie dépasse La quantite Demander';
+  $('#erreur').text(erreur);
+  
+  }
+  else{
+  var t = '';
   //console.log($somme);
   $i = 0;
   $pr = [];
   $('#produitmodal tr').each(function () { //parcourt for tr table
     $element = {} ;
-      $element.produit_id = $(this).data('idproduit');
+      $element.idproduit =$(this).data('idtable'); 
+      $element.idstock = $(this).data('idproduit');
       $element.produit = $(this).find('#produit').text(); //set value for first td in table for id_teacher
       $element.quantite = $(this).find('#quantite_actuel').text();
       $element.prix= $(this).find('#prix').text();
@@ -249,30 +263,81 @@ function addRow() {
       $pr[$i]=$element;
       //if exist fill in table
       $i++;
-          if ($element.sortie != 0) {
-
-      var tr = "<tr id='"+$element.produit_id+"'><td id='produit'>"+ $element.produit +"</td><td id='quantite_actuel'>"+ $element.quantite +"</td><td id='prix'>"+ $element.prix +"</td><td name='sortie' id='sortie'>"+$element.sortie+"</td></tr>";
+      if ($element.sortie != 0) {
+      var tr = "<tr data-idtable='"+$element.idproduit+"' data-idproduit='"+$element.idstock+"'><td>"+ $element.produit +"</td><td id='quantite_actuel'>"+ $element.quantite +"</td><td id='prix'>"+ $element.prix +"</td><td name='sortie' id='sortie'>"+$element.sortie+"</td></tr>";
       t = t+tr;
           }
 })
- var table ="<table id='"+$element.produit_id+"' style='background-color:#02eefa;' class='table'> <thead> <tr> <th> Produits</th> <th> Quantite</th><th> Prix </th> <th> Quantite Sortie</th> <th onclick='remove("+$element.produit_id+")'> <i style='font-size:2em;color:red' class='fas fa-ban'></i> </th></tr></thead>"
-            +"<tbody >"+t+" </tbody>"
-            +"<tfoot> <tr><td colspan='2'> Quantite Demander : </td> <td ><output> "+ $somme +" </output> </td> </tr> </tfoot></table>";
-      $('#produitsortie'+$element.produit_id+'').append(table);
+ var table ="<table id='table"+$element.produit_id+"' style='background-color:#02eefa;' class='table'> <thead> <tr> <th> Produits</th> <th> Quantite</th><th> Prix </th> <th> Quantite Sortie</th> <th onclick='remove("+$element.produit_id+")'> <i style='font-size:2em;color:red' class='fas fa-ban'></i> </th></tr></thead>"
+            +"<tbody id='getproduits' >"+t+" </tbody>"
+            +"<tfoot> <tr><td colspan='2'> Quantite Demander : </td> <td ><output> "+ somme +" </output> </td> </tr> </tfoot></table>";
+      $('#produitsortie'+$element.idproduit+'').append(table);
+
+      }
           
-    
-
-
 }
 
 //---------------------------------------------------------------------
 function remove($id) {
   
-  $('#produitsortie'+$id).remove();
+  $('#table'+$id).remove();
   
 }
+//-------------------------------------------
+function get_produits() {
+   $('#getproduits tr').each(function () { //parcourt for tr table
+    $element = {} ;
+      $element.idproduit =$(this).data('idtable'); 
 
+      $element.stock_id = $(this).data('idproduit');
+      $element.produit = $(this).find("td:eq(0)").text(); 
+      $element.quantite = $(this).find("td:eq(1)").text();
+      $element.prix= $(this).find("td:eq(2)").text();
+      $element.sortie =$(this).find("td:eq(3)").text();
+      //if( $element.sortie != 0){
+      //console.log($element.sortie);
+      $pr[$i]=$element;
+      //}
+      $i++; 
+});
+console.log($pr) ;
 
+}
+//---------------------------Store ---------------------------------------
+function newstore()
+{
+        var formData  = new FormData();
+        $token = "{{ csrf_token() }}" ;
+        formData.append('magasin', $('#magasin...').val());
+        formData.append('demande', $('#demande').val());
+        formData.append('date', $('#date').val());
+        formData.append('reference', $('#reference').val());
+
+        formData.append('products',JSON.stringify(get_produits()));
+        formData.append('_token', $token);
+         console.log(formData);
+        $.ajax({
+            type : 'POST',
+            url :"{{route('store.sortie')}}",
+            dataType :'json',
+            data:formData,
+            contentType: false,
+            processData:false,
+
+            headers: {'X-CSRF-TOKEN':$token},
+        success: function(result)
+        {
+
+        console.log(result);
+        location.reload();
+
+        },
+        error:function(){
+         alert( 'Error ...');
+        }
+        })
+    
+}
 
 
 

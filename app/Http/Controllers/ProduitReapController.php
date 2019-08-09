@@ -15,7 +15,7 @@ class ProduitReapController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $produitreaps=ProduitReap::orderBy('id','desc')->get();
+    {   $produitreaps=ProduitReap::orderBy('id','desc')->paginate(7);
         return view('demande.produitreap.index',compact('produitreaps'));
     }
 

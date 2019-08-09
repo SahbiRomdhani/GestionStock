@@ -33,5 +33,6 @@
             @else Base Donnée est vide
             @endif
         </table>
+        {{$produitreaps->links()}}
     </div>
 @endsection

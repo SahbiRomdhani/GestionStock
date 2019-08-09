@@ -23,7 +23,7 @@ class ProduitStockController extends Controller
      */
     public function index()
     {
-        $produits  = ProduitStock::orderBy('id', 'desc')->get();
+        $produits  = ProduitStock::orderBy('id', 'desc')->paginate(7);
         return view('stock.index', compact('produits'));
     }
 

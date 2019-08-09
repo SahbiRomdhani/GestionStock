@@ -14,7 +14,7 @@ class FournisseurController extends Controller
      */
     public function index()
     {   
-        $fournisseurs = Fournisseur::orderBy('id','desc')->get();
+        $fournisseurs = Fournisseur::orderBy('id','desc')->paginate(7);
         return view('fournisseur.index',compact('fournisseurs'));
     }
 

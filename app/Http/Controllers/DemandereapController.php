@@ -15,7 +15,7 @@ class DemandereapController extends Controller
      */
     public function index()
     {
-        $reaps=Demandereap::orderBy('id','desc')->get();
+        $reaps=Demandereap::orderBy('id','desc')->paginate(7);
         return view( 'demande.reap.index', compact( 'reaps'));
     }
 

@@ -20,7 +20,7 @@ class BentreController extends Controller
      */
     public function index()
     {   
-        $entre=bentre::orderBy('id','desc')->get();
+        $entre=bentre::orderBy('id','desc')->paginate(7);
         return view('stock.bille.index',compact('entre'));
     }
 
@@ -63,8 +63,9 @@ class BentreController extends Controller
             $prodstock->prix_unitaire = $value->prix;
             $prodstock->quantite_actuel = $value->quantite;
             $prodstock->nbr_mois_garantie = $value->garantie;
-            $prodstock->bon_type = "Entree";
-            $prodstock->bon_id = $id;
+            // $prodstock->bon_type = "Entree";
+            // $prodstock->bon_id = $id;
+            $bentre->stock()->save($prodstock);
             $prodstock->save();
 
             $user = auth()->user();
@@ -72,7 +73,8 @@ class BentreController extends Controller
         }
 
 
-        return redirect('/');
+        $request->session()->flash('success', 'Nouveau Produit Ajouter');
+        return response()->json(['status' => 'Hooray']); 
         
 
     }

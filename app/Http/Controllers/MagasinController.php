@@ -15,7 +15,7 @@ class MagasinController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $magasins = magasin::orderBy('id','desc')->get();
+    {   $magasins = magasin::orderBy('id','desc')->paginate(7);
         return view('magasin.index',compact('magasins'));
     }
 

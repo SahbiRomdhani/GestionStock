@@ -1,8 +1,11 @@
 @extends('layouts.master')
 @section('content')
-    <h1>Stock</h1>
+    <h1 style="text-align: center">Stock des Produits</h1>
 
 
+<div class="row">
+    <div class="col-sm-1" ></div>
+    <div class="col-sm-10" >
     
     <div style="overflow: auto;white-space: nowrap;" class="scrollmenu">
             <a class="btn btn-success" style="border:1px solid black ; float: right; margin-left: 5px; " href="{{ route('bentree.create')}}">Billet Entree</a>
@@ -46,6 +49,9 @@
            Stock est Vide
             @endif
         </table>
+        {{$produits->links()}}
 
     </div>
+    </div>
+</div>
 @endsection

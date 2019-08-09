@@ -19,7 +19,7 @@ class ProduitDemandeAchatController extends Controller
      */
     public function index()
     {   
-        $produitachats = ProduitDemandeAchat::orderBy('id','desc')->get();
+        $produitachats = ProduitDemandeAchat::orderBy('id','desc')->paginate(7);
         return view('achat.produitachat.index',compact( 'produitachats'));
     }
 

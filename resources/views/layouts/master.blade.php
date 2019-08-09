@@ -91,7 +91,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     @foreach (auth()->user()->Notifications as $notification)
                    
-                      <a id="notstyle" style="background-color:#b5bab6 ; color:white"  href="/produitstock/{{$notification->data['produitstock_id']}}" data-notif-id="{{$notification->id}}">
+                      <a id="notstyle" @if (auth()->user()->unreadNotifications() == true)
+                          style="background-color:#b5bab6 ; color:white" 
+                      @endif  href="/produitstock/{{$notification->data['produitstock_id']}}" data-notif-id="{{$notification->id}}">
                         {{$notification->data['user_name']}}
                         {{$notification->data['msg']}}
                         {{$notification->data['magasin']}}

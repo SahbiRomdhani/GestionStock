@@ -20,7 +20,7 @@ class AchatController extends Controller
      */
     public function index()
     {   
-        $achats=demande_achat::orderBy('id','desc')->get();
+        $achats=demande_achat::orderBy('id','desc')->paginate(7);
         return view('achat.index',compact('achats'));
     }
 
@@ -67,7 +67,7 @@ class AchatController extends Controller
 
         $demande = new demande_achat();
         $demande->magasin_id = $request->id_magasin;
-        $demande->date = $request->date_demande_achat;
+        $demande->date = $request->date;
         $demande->etat = "encours";
         $demande->save();
 

@@ -65,7 +65,7 @@
         <tr>
        <td colspan="3"></td>
         <td>
-        <button class="btn btn-success btn-sm " type="button" onclick="get_produits()" >
+        <button class="btn btn-success btn-sm " type="button" onclick="newstore()" >
           Créer </button>
            </td>
         </tr>
@@ -119,7 +119,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-        <button type="button" class="btn btn-info"  onclick="addRow()">Ajouter</button>
+        <button type="button" id="ajouter" class="btn btn-info" data-dismiss="modal" onclick="addRow()">Ajouter</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
         </div>
@@ -190,6 +190,7 @@ $(document).on('change', '.demande', function(){
 //-----------------------Somme des Quantite Sortie --------------------------
 $('#produitmodal').on('input','.sortie',function() {
   var total= 0;
+  var somme =0;
   $('.sortie').each(function () {
     var sortie = $(this).val()-0;
     //console.log(sortie);
@@ -198,6 +199,24 @@ $('#produitmodal').on('input','.sortie',function() {
     $('#quantite').text(total);
 
   });
+  var demande = $('#quantite_demander').text();
+  var erreur = null;
+  somme = $('#quantite').text();
+  console.log(demande);
+  console.log(somme);
+
+  if(somme>demande){
+  erreur ='La Quantite de Sortie dépasse La quantite Demander';
+  $('#erreur').text(erreur);
+  $('#ajouter').prop("disabled",true);
+
+}
+else{
+  $('#erreur').empty();
+
+  $('#ajouter').prop("disabled",false);
+
+}
 })
 //---------------------------------------------------
 function produitdemande($id,$quantite) {
@@ -237,17 +256,9 @@ $('#erreur').empty();
 }
 //-------------------------------Ajouter de model au tableau -----------------------------
 function addRow() {
-  var somme = $('#quantite').val();
-  var demande = $('#quantite_demander').val();
 
-  //console.log(demande);
-  //console.log(somme);
-  if ( somme > demande) {
-  var erreur = 'La Quantite de Sortie dépasse La quantite Demander';
-  $('#erreur').text(erreur);
-  
-  }
-  else{
+  somme = $('#quantite').text();
+
   var t = '';
   //console.log($somme);
   $i = 0;
@@ -269,11 +280,10 @@ function addRow() {
           }
 })
  var table ="<table id='table"+$element.produit_id+"' style='background-color:#02eefa;' class='table'> <thead> <tr> <th> Produits</th> <th> Quantite</th><th> Prix </th> <th> Quantite Sortie</th> <th onclick='remove("+$element.produit_id+")'> <i style='font-size:2em;color:red' class='fas fa-ban'></i> </th></tr></thead>"
-            +"<tbody id='getproduits' >"+t+" </tbody>"
+            +"<tbody id='produitstable' >"+t+" </tbody>"
             +"<tfoot> <tr><td colspan='2'> Quantite Demander : </td> <td ><output> "+ somme +" </output> </td> </tr> </tfoot></table>";
       $('#produitsortie'+$element.idproduit+'').append(table);
 
-      }
           
 }
 
@@ -285,22 +295,23 @@ function remove($id) {
 }
 //-------------------------------------------
 function get_produits() {
-   $('#getproduits tr').each(function () { //parcourt for tr table
+  $i = 0;
+  $pr = [];
+   $('#produitstable tr').each(function () { //parcourt for tr table
     $element = {} ;
       $element.idproduit =$(this).data('idtable'); 
-
       $element.stock_id = $(this).data('idproduit');
       $element.produit = $(this).find("td:eq(0)").text(); 
       $element.quantite = $(this).find("td:eq(1)").text();
       $element.prix= $(this).find("td:eq(2)").text();
       $element.sortie =$(this).find("td:eq(3)").text();
-      //if( $element.sortie != 0){
-      //console.log($element.sortie);
       $pr[$i]=$element;
-      //}
-      $i++; 
+      
+      $i++;
+
+       
 });
-console.log($pr) ;
+return $pr;
 
 }
 //---------------------------Store ---------------------------------------
@@ -308,14 +319,14 @@ function newstore()
 {
         var formData  = new FormData();
         $token = "{{ csrf_token() }}" ;
-        formData.append('magasin', $('#magasin...').val());
+        formData.append('magasin', $('#magasin').val());
         formData.append('demande', $('#demande').val());
         formData.append('date', $('#date').val());
         formData.append('reference', $('#reference').val());
 
         formData.append('products',JSON.stringify(get_produits()));
         formData.append('_token', $token);
-         console.log(formData);
+        //console.log(formData);
         $.ajax({
             type : 'POST',
             url :"{{route('store.sortie')}}",

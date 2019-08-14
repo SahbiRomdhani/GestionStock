@@ -103,18 +103,18 @@ class BsortieController extends Controller
             ['prix_unitaire', '=', $value->prix],
 
         ])->first()->quantite_actuel;
-        $sortie=$stock_qunt-($value->quantite);
-        //abs($x);
+        $sortie=$stock_qunt-($value->sortie);
+        //return $value->quantite;
         $table =DB::table('produit_stock')->where([
         
-            ['produit_id', '=', $value->idproduit],
-            ['prix_unitaire', '=', $value->prix],
+          ['produit_id', '=', $value->idproduit],
+        ['prix_unitaire', '=', $value->prix],
 
         ])->update(['quantite_actuel' => $sortie]);
 
     }
 
-return $products;
+ return $products;
 
     
 

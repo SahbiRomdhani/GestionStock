@@ -83,7 +83,7 @@
            <td> <input type="number"  class="form-control " id="quan" min="1"> </td>
            <td> <input type="number"  class="form-control "  id="pr" min="1"> </td>
            <td> <input type="number"  class="form-control" id="gar" min="1"> </td>
-           <td  onclick="addRow()"><i style="font-size:2em;color:green" name="submit"   class="fas fa-plus-circle"></i></td>
+           <td  onclick="addRow()">   <a name="submit" class="btn btn-success ml-1" data-toggle="tooltip"><i class="fas fa-plus-circle" style="color: white;"></i></td>
            </tr>
         </tbody>
         
@@ -113,7 +113,7 @@
         <tr>
             <td colspan="4" ></td> 
             <td onclick="newstore()">
-            <input type="submit" value="submit" class="btn btn-info" >
+            <input type="submit" value="Créer" class="btn btn-success" >
             </td> 
         </tr>
        </tfoot>

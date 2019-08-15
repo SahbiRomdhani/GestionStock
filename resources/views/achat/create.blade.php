@@ -77,15 +77,14 @@
                         </tbody>
                       </table>
                    
-
-
-
+        <div class="col-sm-2" ></div>
+        <div class="col-sm-8" >
                      <table class="table table-borderd" >
                        <thead>
                          <tr>
-                           <th>Fournisseur</th>
-                           <th>Produit</th>
-                           <th>Quantite</th>
+                           <th style="width: 30%">Fournisseur</th>
+                           <th style="width: 30%">Produit</th>
+                           <th style="width: 30%">Quantite</th>
                          </tr>
                        </thead>
                        <tbody id="body">
@@ -101,8 +100,8 @@
                         </tr>
                       </tfoot>
                     </table>
+        </div>
     </div><!--card-->
-
 
     
 @endsection

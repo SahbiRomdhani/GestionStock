@@ -193,9 +193,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="{{route('facture.index')}}"><i class="fas fa-hand-holding-usd"></i> <span> Bon de Livraison Facture</span></a></li>
-
         <li class="active"><a  href="{{route('bentree.index')}}"><i class="fas fa-network-wired"></i><span> Bon de Entree</span> </a></li>
         <li class="active"><a  href="{{route('bsortie.index')}}"><i class="fas fa-shipping-fast"></i><span> Bon de Sortie</span> </a></li>
+        <li class="active"><a href="{{route('achat.index')}}"><i class="fas fa-dollar-sign"></i> Demande Achat </a></li>
+
         
         <li class="treeview">
           <a href=""><i class="fab fa-product-hunt"></i> <span> Produit</span>
@@ -204,25 +205,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
           </a>
         <ul class="treeview-menu">
-          
-        <li ><a   href="{{route('produitsortie.index')}}">Produit Sortie </a></li>
-        <li ><a   href="{{route('produitstock.index')}}">produit Stock  </a></li>
+        <li><a href="{{route('produitachat.index')}}"> Produit Achat</a></li>
+ 
+        <li ><a href="{{route('produitsortie.index')}}">Produit Sortie </a></li>
+        <li ><a href="{{route('produitstock.index')}}">produit Stock  </a></li>
 
         </ul>
         </li>
-        <li class="treeview">
-          <a href=""><i class="fas fa-dollar-sign"></i> <span> Achat</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-        <ul class="treeview-menu">
-
-        <li><a   href="{{route('achat.index')}}">Demande Achat </a></li>
-        <li><a  href="{{route('produitachat.index')}}"> Produit Achat</a></li>
-
-        </ul>
-        </li>
+    
         
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Reap</span>

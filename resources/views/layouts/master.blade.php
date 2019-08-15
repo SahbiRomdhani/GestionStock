@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="header">
                 You have {{ count(Auth::user()->unreadNotifications)}} notifications 
 
-                 <a href="{{route('maskasread')}}" onclick="markasread()"> Mark as Read</a>
+                 <a href="{{route('maskasread')}}" > Mark as Read</a>
               
               </li>
 
@@ -403,9 +403,6 @@ $('a[data-notif-id]').click(function () {
 })
 //-------------------------
 
-function markasread(){
-    $("#notstyle").css("background-color","white");
-}
 </script>
 @yield('script')
 

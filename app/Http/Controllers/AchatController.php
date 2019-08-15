@@ -139,7 +139,7 @@ class AchatController extends Controller
         ];
         $pdf = \App::make('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('backend.GestionStock.Demandeachat.pdfview', $data);
+        $pdf->loadView('GestionStock.Demandeachat.pdfview', $data);
         return $pdf->stream('demandesachat.pdf');
     }
 

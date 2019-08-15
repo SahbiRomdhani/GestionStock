@@ -49,8 +49,9 @@ class DemandereapController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $reap=Demandereap::find($id);
+        return view('demande.reap.show',compact('reap'));
     }
 
     /**

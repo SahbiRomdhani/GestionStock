@@ -16,7 +16,7 @@ class ProduitSortieController extends Controller
      */
     public function index()
     {
-        $produitsortie=ProduitSortie::orderBy( 'id','desc');
+        $produitsortie=ProduitSortie::orderBy( 'id','desc')->paginate(7);
         return view('stock.bille.bsortie.produitsortie.index',compact( 'produitsortie'));
     }
 

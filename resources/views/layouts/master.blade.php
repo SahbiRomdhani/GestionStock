@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     
                     @foreach (auth()->user()->Notifications as $notification)
                    
-                      <a id="notstyle" @if (auth()->user()->unreadNotifications())
+                      <a id="notstyle" @if ($notification->read_at == null)
                           style="background-color:#b5bab6 ; color:white" 
                       @endif  href="/produitstock/{{$notification->data['produitstock_id']}}" data-notif-id="{{$notification->id}}">
                         {{$notification->data['user_name']}}
@@ -196,8 +196,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <li class="active"><a  href="{{route('bentree.index')}}"><i class="fas fa-network-wired"></i><span> Bon de Entree</span> </a></li>
         <li class="active"><a  href="{{route('bsortie.index')}}"><i class="fas fa-shipping-fast"></i><span> Bon de Sortie</span> </a></li>
-      
-     
+        
+        <li class="treeview">
+          <a href=""><i class="fab fa-product-hunt"></i> <span> Produit</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+        <ul class="treeview-menu">
+          
+        <li ><a   href="{{route('produitsortie.index')}}">Produit Sortie </a></li>
+        <li ><a   href="{{route('produitstock.index')}}">produit Stock  </a></li>
+
+        </ul>
+        </li>
         <li class="treeview">
           <a href=""><i class="fas fa-dollar-sign"></i> <span> Achat</span>
             <span class="pull-right-container">
@@ -208,6 +220,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <li><a   href="{{route('achat.index')}}">Demande Achat </a></li>
         <li><a  href="{{route('produitachat.index')}}"> Produit Achat</a></li>
+
         </ul>
         </li>
         
@@ -230,6 +243,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </span>
           </a>
         <ul class="treeview-menu" >
+
         <li><a href="{{route('magasin.index')}}"> Magasin</a></li>
         <li><a href="{{route('fournisseur.index')}}"> Fournisseur</a></li>
         <li><a href="{{route('produit.index')}}">Liste de Produit</a></li>
@@ -382,10 +396,6 @@ $('a[data-notif-id]').click(function () {
         
         success: function(result) 
         {
-          $("#notstyle").removeAttr("style");
-          $("#notstyle").css("background-color","white");
-
-
           console.log(result);
           
         }

@@ -24,7 +24,7 @@
             @foreach ($entre as $item)
                 
             
-            <td>{{$item->b_sortie_id}}</td>
+            <td><a href="/bsortie/{{$item->b_sortie_id}}">{{$item->b_sortie_id}}</a></td>
             <td>{{$item->magasin->nom_magasin}}</td>
             <td>{{$item->date}}</td>
 

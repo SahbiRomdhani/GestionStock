@@ -47,7 +47,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/produit','ProduitController');
 Route::resource('/magasin','MagasinController');
 Route::resource('/fournisseur','FournisseurController');
-Route::resource('/produitstock','ProduitStockController');
 Route::resource('/bentree','BentreController');
 Route::resource('/produitachat','ProduitDemandeAchatController');
 Route::resource('/produitsortie','ProduitSortieController');
@@ -55,8 +54,10 @@ Route::resource('/demandereap','DemandereapController');
 Route::resource('/produitreap', 'ProduitReapController');
 
 /**
- * 
+ * Produit STock 
  */
+Route::resource('/produitstock', 'ProduitStockController');
+
 Route::get('/createstock/{id}/{type}', 'ProduitStockController@createstock')->name('stockprod');
 Route::post('/getproduit', 'ProduitStockController@fillproduit');
 Route::post('/stock/store/', 'ProduitStockController@storestock')->name('stockprod.store');

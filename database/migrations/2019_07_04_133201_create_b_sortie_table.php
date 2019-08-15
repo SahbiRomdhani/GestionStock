@@ -16,7 +16,7 @@ class CreateBSortieTable extends Migration
         Schema::create('b_sortie', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('demande_reap_id')->unsigned();
-            $table->bigInteger('demande_maintenance_id')->unsigned();
+            $table->string('reference');
             $table->string('date');
             $table->timestamps();
         });

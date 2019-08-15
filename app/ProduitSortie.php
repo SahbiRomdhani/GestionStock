@@ -13,11 +13,11 @@ class ProduitSortie extends Model
 
     public function stock()
     {
-        return $this->hasOne('App\ProduitStock');
+        return $this->belongsTo('App\ProduitStock');
     }
     public function sortie()
     {
-        return $this->hasOne('App\Produit');
+        return $this->belongsTo('App\Produit');
     }
 
 

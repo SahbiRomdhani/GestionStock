@@ -22,14 +22,14 @@
              @foreach ($bsortie as $sortie)
        
             <tr>
-                <td>{{$sortie->demande_reap_id}}</td>
+                <td><a href="/demandereap/{{$sortie->demande_reap_id}}">{{$sortie->demande_reap_id}}</a></td>
                 <td>{{$sortie->reference}}</td>
                 <td>{{$sortie->date}}</td>
 
             </tr>
              @endforeach  
              @else 
-             Table Vide
+             Tableau est Vide
              @endif
         </table>
         {{$bsortie->links()}}

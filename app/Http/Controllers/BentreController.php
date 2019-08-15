@@ -87,7 +87,8 @@ class BentreController extends Controller
      */
     public function show($id)
     {
-        //
+        $entree = bentre::find($id);
+        return view('stock.bille.show',compact('entree'));
     }
 
     /**

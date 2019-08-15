@@ -68,7 +68,7 @@ class BsortieController extends Controller
             ->selectRaw(
             'produit_stock.id,produits.designation,produit_stock.quantite_actuel
             ,produit_stock.prix_unitaire,produits.id As produit_id'
-            )->where('produit_id', $request->id)->get();
+            )->where([['produit_id', $request->id],['quantite_actuel' ,'>', 0]])->get();
         return response($stocks);
     }
 
@@ -116,18 +116,7 @@ class BsortieController extends Controller
 
  return $products;
 
-    
 
-
-
-
-
-        // foreach ($products as $value) {
-        //     $quantite_actuel = ProduitStock::where('id', $value->stock_id)->get();
-        //     $prodstock = ProduitStock::find($value->stock_id);
-        //     $prodstock->quantite_actuel = $value->quantite;        
-        //     $prodstock->save();
-        // }
     }
 
     /**
@@ -138,7 +127,8 @@ class BsortieController extends Controller
      */
     public function show($id)
     {
-        //
+        $sortie = bsortie::find($id);
+        return view ('stock.bille.bsortie.show',compact('sortie'));
     }
 
     /**

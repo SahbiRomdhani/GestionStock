@@ -191,6 +191,11 @@ $(document).on('change', '.demande', function(){
 $('#produitmodal').on('input','.sortie',function() {
   var total= 0;
   var somme =0;
+  
+  $('#erreur').empty();
+
+  $('#ajouter').prop("disabled",false);
+
   $('.sortie').each(function () {
     var sortie = $(this).val()-0;
     //console.log(sortie);
@@ -205,18 +210,16 @@ $('#produitmodal').on('input','.sortie',function() {
   console.log(demande);
   console.log(somme);
 
-  if(somme>demande){
+if(somme>demande){
   erreur ='La Quantite de Sortie dépasse La quantite Demander';
   $('#erreur').text(erreur);
   $('#ajouter').prop("disabled",true);
+  var somme =0;
+
 
 }
-else{
-  $('#erreur').empty();
 
-  $('#ajouter').prop("disabled",false);
 
-}
 })
 //---------------------------------------------------
 function produitdemande($id,$quantite) {
@@ -224,7 +227,6 @@ function produitdemande($id,$quantite) {
   var quantite = $quantite;
   var total= 0;
 
-    //console.log(id);
 
     $.ajax({
       url: "{{URL::route('prod.demandeReap') }}",
@@ -235,7 +237,6 @@ function produitdemande($id,$quantite) {
       type: 'post',
       datatype: 'json',
       success: function(result){
-        //console.log(result);
          $.each(result, function(k, v){
    
         $('#produitmodal').append("<tr data-idtable='"+v.produit_id+"' data-idproduit='"+v.id+"' ><td id='produit'>"+ v.designation +"</td><td id='quantite_actuel'>"+ v.quantite_actuel +"</td><td id='prix'>"+ v.prix_unitaire +"</td><td><input type='number' class='form-control sortie' name='sortie' id='sortie' onKeyUp='if(this.value>"+v.quantite_actuel +"){this.value="+v.quantite_actuel +";}' ></td></tr>");
@@ -260,7 +261,6 @@ function addRow() {
   somme = $('#quantite').text();
 
   var t = '';
-  //console.log($somme);
   $i = 0;
   $pr = [];
   $('#produitmodal tr').each(function () { //parcourt for tr table
@@ -326,7 +326,6 @@ function newstore()
 
         formData.append('products',JSON.stringify(get_produits()));
         formData.append('_token', $token);
-        //console.log(formData);
         $.ajax({
             type : 'POST',
             url :"{{route('store.sortie')}}",
@@ -339,7 +338,6 @@ function newstore()
         success: function(result)
         {
 
-        console.log(result);
         location.reload();
 
         },

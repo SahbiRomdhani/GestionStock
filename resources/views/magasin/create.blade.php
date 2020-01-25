@@ -63,17 +63,7 @@
             </span>
         @endif
     </div>
-    <div class="form-group {{ $errors->has('user_id') ? 'has-error': ''}}">
-        {{Form::label('user_id', 'User'),['class'=>'control-label']}}
-        {{Form::select('user_id',[''=>'selectionner user'] + $user,NULL,['class'=>'form-control'])}}
-        @if ($errors->has('user_id'))
-            <span class="help-block">
-                {{$errors->first('user_id')}}
-
-            </span>
-        @endif
-    </div>
-    
+   
    
     
     {{Form::submit('submit',['class'=> 'btn btn-primary'])}}

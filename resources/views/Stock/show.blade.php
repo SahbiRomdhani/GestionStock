@@ -8,7 +8,7 @@
     
         <table class="table table-striped">
             <tr>
-            <th> Bon De ID </th>
+            <th>Bon De ID </th>
             <th>Produit</th>
             <th>Magasin</th>
             <th>Type </th>

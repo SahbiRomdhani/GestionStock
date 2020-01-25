@@ -10,6 +10,7 @@ use App\demande_achat;
 use App\ProduitDemandeAchat;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class AchatController extends Controller
 {
@@ -43,7 +44,7 @@ class AchatController extends Controller
     public function getproducts(Request $request)
     {  
         //$id = $request->get(id);
-        $products = DB::table('produits')->where('categorie_id', $request->id)->get();
+        $products = FacadesDB::table('produits')->where('categorie_id', $request->id)->get();
         //dd($products);
         return  response($products); 
     }
@@ -64,10 +65,9 @@ class AchatController extends Controller
      */
     public function storeachat(Request $request)
     {
-
         $demande = new demande_achat();
         $demande->magasin_id = $request->id_magasin;
-        $demande->date = $request->date;
+        $demande->date = $request->date_demande_achat;
         $demande->etat = "encours";
         $demande->save();
 
@@ -88,7 +88,7 @@ class AchatController extends Controller
 
 
         $request->session()->flash('success', 'Demande a été Ajouter ');
-        return response()->json(['status' => 'Hooray']);    
+        return redirect('/achat');    
     }
 
     /**
@@ -129,19 +129,19 @@ class AchatController extends Controller
         
 
     }
-    public function print()
-    {
-        $demandes = demande_achat::all();
-        $entreprise = Fournisseur::find(1);
-        $data = [
-            'demandes' => $demandes,
-            'entreprise' => $entreprise
-        ];
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('GestionStock.Demandeachat.pdfview', $data);
-        return $pdf->stream('demandesachat.pdf');
-    }
+    // public function print()
+    // {
+    //     $demandes = demande_achat::all();
+    //     $entreprise = Fournisseur::find(1);
+    //     $data = [
+    //         'demandes' => $demandes,
+    //         'entreprise' => $entreprise
+    //     ];
+    //     $pdf = \App::make('dompdf.wrapper');
+    //     $pdf->getDomPDF()->set_option("enable_php", true);
+    //     $pdf->loadView('GestionStock.Demandeachat.pdfview', $data);
+    //     return $pdf->stream('demandesachat.pdf');
+    ///}
 
     /**
      * Remove the specified resource from storage.

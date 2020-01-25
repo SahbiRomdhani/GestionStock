@@ -24,7 +24,7 @@
                 </select>
            </td>
            <td>     
-            <input type="date" class="form-control" name="date">
+            <input type="date" class="form-control" id="date">
             </td>
        </tbody>
     </table>
@@ -94,7 +94,7 @@
                              <tr>
                         <td colspan="3"></td>
                         <td>
-                            <button class="btn btn-success btn-sm " type="button" onclick="new_demande_achat()">
+                            <button class="btn btn-success btn-sm" type="button" onclick="new_demande_achat()">
                             Créer</button>
                         </td>
                         </tr>
@@ -223,7 +223,7 @@
         $element.id_fournisseur = $(this).data("idfournisseur");
         $element.quantite= $(this).find("td:eq(2)").text();
         $pr[$i]=$element;
-            $i++; //if exist fill in table
+        $i++; //if exist fill in table
     });
     return $pr;
   }
@@ -251,7 +251,7 @@ function new_demande_achat()
      {
 
         console.log(result);
-        document.location.href = result;
+        //document.location.href = result;
 
      },
      error:function(){

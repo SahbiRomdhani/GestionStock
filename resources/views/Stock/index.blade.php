@@ -8,7 +8,7 @@
     <div class="col-sm-10" >
     
     <div style="overflow: auto;white-space: nowrap;" class="scrollmenu">
-            <a class="btn btn-success" style="border:1px solid black ; float: right; margin-left: 5px; " href="{{ route('bentree.create')}}">Billet Entree</a>
+            <a class="btn btn-success" style="border:1px solid black ; float: right; margin-left: 5px; " href="{{ route('bentree.create')}}">Bon de Entree</a>
             <a class="btn btn-success" style="border:1px solid black ; float: right; " href="{{ route('facture.create')}}">Livraison Facture</a>
 
         <table class="table table-striped">

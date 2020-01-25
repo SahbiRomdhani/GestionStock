@@ -35,7 +35,7 @@ class BsortieController extends Controller
         $magasin=magasin::all();
         $demandereap=Demandereap::all();
         $maintenance=Maintenance::all();
-        return view( 'stock.bille.bsortie.create',compact('demandereap', 'maintenance', 'magasin', 'stocks'));
+        return view( 'stock.bille.bsortie.create',compact('demandereap', 'maintenance', 'magasin'));
 
     }
     /**

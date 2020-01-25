@@ -72,7 +72,7 @@
 
                     @foreach($categories as $category)
                    <option value="{{ $category->id}}">{{ $category->categorie}}</option>
-                          @endforeach
+                    @endforeach
                     </select>
             </td>
            <td> 
@@ -212,8 +212,8 @@ function addRow() {
           $id = parseInt($id);
           $i = 0;
           $('#stock tr').each(function () { //parcourt for tr table
-              $product =  $(this).data("idproduct"); //set value for first td in table for id_teacher
-              if ($id == $product){ //verify if id equal ti id_teacher
+              $product =  $(this).data("idproduct"); //set value for first td in table for id_product
+              if ($id == $product){ //verify if id equal ti id_product
                   $i++; //if exist fill in table
               }
           });
@@ -275,7 +275,7 @@ function newstore()
 
         },
         error:function(){
-         alert( 'Error ...');
+         alert( 'Error !! empty fields');
         }
         })
     

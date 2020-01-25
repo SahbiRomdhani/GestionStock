@@ -11,6 +11,7 @@ use App\demande_achat;
 use App\LivraisonFacture;
 use Illuminate\Http\Request;
 use App\Notifications\StockNot;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\LivraisonRequest;
 
 class LivraisonFactureController extends Controller
@@ -35,7 +36,8 @@ class LivraisonFactureController extends Controller
     {
 
         $categories = categorie::all();
-        $achat= demande_achat::all();
+        $achat = DB::table('demande_achat')->select('id')->where('etat','=', 'encours')->get();
+        //$achat= demande_achat::all();
         $fournisseur= Fournisseur::all();
         return view( 'stock.facture.create',compact('achat', 'fournisseur', 'categories'));
     }
@@ -55,8 +57,11 @@ class LivraisonFactureController extends Controller
         $livraison->reference = $request->input('reference');
         $livraison->fournisseur_id = $request->input('fournisseur_id');
         $livraison->save();
+        $achat = demande_achat::find($request->input('demande_achat_id'));
+        $achat->etat= "terminer";
+        $achat->save();
 
-        $id = $livraison->id;
+        //$id = $livraison->id;
         $products = json_decode($request->products);
         /** Save Produit Dans le stock */
         foreach ($products as $value) {

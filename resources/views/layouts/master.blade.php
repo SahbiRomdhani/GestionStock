@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Font Awesome -->
   <link rel="stylesheet" href={{asset('AdminLTE/bower_components/font-awesome/css/font-awesome.min.css')}}>
     <link rel="stylesheet" href={{asset('AdminLTE/bower_components/font-awesome/css/all.min.css')}}>
+    
 
   <!-- Ionicons -->
   <link rel="stylesheet" href={{asset('AdminLTE/bower_components/Ionicons/css/ionicons.min.css')}}>
@@ -28,6 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{asset('css/main.css')}}">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
 
 
 
@@ -195,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li class="active"><a href="{{route('facture.index')}}"><i class="fas fa-hand-holding-usd"></i> <span> Bon de Livraison Facture</span></a></li>
         <li class="active"><a  href="{{route('bentree.index')}}"><i class="fas fa-network-wired"></i><span> Bon de Entree</span> </a></li>
         <li class="active"><a  href="{{route('bsortie.index')}}"><i class="fas fa-shipping-fast"></i><span> Bon de Sortie</span> </a></li>
-        <li class="active"><a href="{{route('achat.index')}}"><i class="fas fa-dollar-sign"></i> Demande Achat </a></li>
+        <li class="active"><a href="{{route('achat.index')}}"><i class="fas fa-dollar-sign"></i> <span>Demande Achat </span> </a></li>
 
         
         <li class="treeview">

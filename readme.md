@@ -23,9 +23,9 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Setup Laravel Project
 
-copy('.env.example', '.env');"
-composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-php artisan key:generate
+- copy('.env.example', '.env');" .
+- composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist .
+- php artisan key:generate.
 
 
 

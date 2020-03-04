@@ -27,8 +27,14 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 - composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist .
 - php artisan key:generate.
 
+## Laravel Project Images
 
+![image](https://user-images.githubusercontent.com/49311743/75881800-15725400-5e20-11ea-8d3a-29f5883b6077.PNG)
+![image](https://user-images.githubusercontent.com/49311743/75881794-13a89080-5e20-11ea-9081-3d6e3d864a5f.PNG)
+![image](https://user-images.githubusercontent.com/49311743/75881795-14d9bd80-5e20-11ea-8179-bdc63b850d38.PNG)
+![image](https://user-images.githubusercontent.com/49311743/75881796-14d9bd80-5e20-11ea-9ae2-3c1b741a7415.PNG)
 
+![image](https://user-images.githubusercontent.com/49311743/75881803-173c1780-5e20-11ea-8be3-f158e4daa867.PNG)
 
 
 
